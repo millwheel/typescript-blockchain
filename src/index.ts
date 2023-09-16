@@ -35,8 +35,8 @@ class Blockchain{
         const block = new Block(this.getPrevHash(), this.blocks.length + 1, data);
         this.blocks.push(block);
     }
-    public getBlocks(){
-        return this.blocks;
+    public getBlocks(): readonly Block[]{
+        return JSON.parse(JSON.stringify([...this.blocks]));
     }
 }
 
@@ -44,6 +44,8 @@ const blockchain = new Blockchain();
 blockchain.addBlock("First");
 blockchain.addBlock("Second");
 blockchain.addBlock("Third");
+
+blockchain.getBlocks()[blockchain.getBlocks().length-1].data = "HECKED"
 
 console.log(blockchain.getBlocks());
 
